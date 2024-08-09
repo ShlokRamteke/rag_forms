@@ -32,11 +32,9 @@ const chatSession = model.startChat({
   // See https://ai.google.dev/gemini-api/docs/safety-settings
 });
 
-const result = await chatSession.sendMessage("INSERT_INPUT_HERE");
-console.log(result.response.text());
-
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 mongoose
   .connect(config.mongodbUri)
