@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+
 import "./App.css";
+import instance from "./axios.js";
 
 function App() {
   const [forms, setForms] = useState([]);
@@ -15,9 +16,7 @@ function App() {
 
   const fetchForms = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_APP_API_URL}/api/forms`
-      );
+      const response = await instance.get("/api/forms");
 
       setForms(response.data);
     } catch (error) {
@@ -33,13 +32,10 @@ function App() {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_APP_API_URL}/api/analyze`,
-        {
-          formId: selectedForm._id,
-          question,
-        }
-      );
+      const response = await instance.post("/api/analyze", {
+        formId: selectedForm._id,
+        question,
+      });
       setAnalysis(response.data);
     } catch (error) {
       console.error("Error analyzing question:", error);

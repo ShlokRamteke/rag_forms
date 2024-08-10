@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { pipeline } from "@xenova/transformers";
 import config from "./config.js";
+import cors from "cors";
 
 import Form from "./model/forms.js";
 
