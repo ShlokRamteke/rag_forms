@@ -75,18 +75,10 @@ Google's Gemini model is used for the final question-answering step. Gemini take
 
 ## API Endpoints
 
-`GET /api/forms:` Retrieve all forms
-`POST /api/forms`: Create a new form
-`POST /api/analyze`: Analyze a question for a specific form
+- `GET /api/forms:` Retrieve all forms
+- `POST /api/forms`: Create a new form
+- `POST /api/analyze`: Analyze a question for a specific form
 
-5. Navigate to the project directory
-   ```
-   cd customer-portal
-   ```
-6. Install the dependencies
-   ```
-   npm install
-   ```
 
 ## Setup and Installation
 
