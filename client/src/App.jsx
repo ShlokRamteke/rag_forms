@@ -10,6 +10,8 @@ function App() {
   const [analysis, setAnalysis] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  //console.log(selectedForm);
+
   useEffect(() => {
     fetchForms();
   }, []);
@@ -19,13 +21,16 @@ function App() {
       const response = await instance.get("/api/forms");
 
       setForms(response.data);
+      //console.log("forms", forms);
     } catch (error) {
       console.error("Error fetching forms:", error);
     }
   };
-  const handleFormSelect = (form) => {
-    setSelectedForm(form);
-    setAnalysis(null);
+  const handleFormSelect = (e) => {
+    const selectedFormId = e.target.value;
+    const selectedForm = forms.find((form) => form._id === selectedFormId);
+
+    setSelectedForm(selectedForm);
   };
 
   const handleQuestionSubmit = async (e) => {
@@ -51,11 +56,7 @@ function App() {
         <h1>Form Analysis</h1>
         <div className="form-selection">
           <label htmlFor="form-select">Select a form:</label>
-          <select
-            id="form-select"
-            value={selectedForm ? selectedForm._id : ""}
-            onChange={handleFormSelect}
-          >
+          <select id="form-select" onChange={handleFormSelect}>
             <option value="">Choose a form</option>
             {forms.map((form) => (
               <option key={form._id} value={form._id}>
