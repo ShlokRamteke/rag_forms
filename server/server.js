@@ -97,17 +97,18 @@ function prepareContext(responses) {
     })
     .join("\n\n");
 }
+app.get("/api/ping", (req, res) => {
+  res.json({ message: "ping" });
+});
 
 app.get("/api/forms", async (req, res) => {
   const forms = await Form.find().select("name");
-  console.log("forms", forms);
 
   res.json(forms);
 });
 
 app.post("/api/forms", async (req, res) => {
   const { name, fields, responses } = req.body;
-  //console.log("fields, responses", fields, responses);
 
   const embeddedResponses = await Promise.all(
     responses.map(async (response) => ({
@@ -118,7 +119,6 @@ app.post("/api/forms", async (req, res) => {
 
   const form = new Form({ name, fields, responses: embeddedResponses });
   await form.save();
-  console.log(form);
 
   res.json(form);
 });
@@ -130,15 +130,10 @@ app.post("/api/analyze", async (req, res) => {
     const similarResponses = await findSimilarResponses(formId, question);
 
     const context = prepareContext(similarResponses.map((r) => r.data));
-    console.log("question & context", question, similarResponses);
-    console.log(
-      `Answer the below question from the Context Question:${question} Context:${context}. If not present say no answer`
-    );
 
     const result = await chatSession.sendMessage(
       `Answer the below question from the Context.If not present say no answer Question:${question} Context:${context}. `
     );
-    console.log(result.response.text());
 
     res.json({
       answer: result.response.text(),
