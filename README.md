@@ -4,7 +4,6 @@
 
 This application is a MERN (MongoDB, Express.js, React, Node.js) stack project that allows users to analyze form data using advanced natural language processing techniques. It implements a Retrieval-Augmented Generation (RAG) system to answer questions about form data, utilizing embeddings for efficient retrieval and Gemini for question-answering.
 
-To install the Application, follow these steps:
 
 ## Features
 
