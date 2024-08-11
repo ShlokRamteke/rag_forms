@@ -108,6 +108,7 @@ button:disabled {
   background-color: #f8f9fa;
   border: 1px solid #ddd;
   border-radius: 4px;
+  color: #333;
 }
 
 @media (max-width: 650px) {
