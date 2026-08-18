@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import instance from '../axios';
-import { Copy, Check, FileText, MessageSquare, List, Lock, Globe, Trash2, Edit3, Clock, Sparkles } from 'lucide-react';
+import { Copy, Check, FileText, MessageSquare, List, Lock, Globe, Trash2, Edit3, Clock } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import { demoForms } from '../utils/seedData';
 
@@ -96,7 +96,6 @@ const Dashboard = () => {
   const totalForms = forms.length;
   const totalDrafts = drafts.length;
   const totalResponses = forms.reduce((sum, form) => sum + (form.responseCount || 0), 0);
-  const totalFields = forms.reduce((sum, form) => sum + (form.fields?.length || 0), 0);
   const encryptedForms = forms.filter((form) => (form.privacyMode ?? 'encrypted') === 'encrypted').length;
 
   const normalizedQuery = searchTerm.trim().toLowerCase();
@@ -124,7 +123,7 @@ const Dashboard = () => {
       <main className="flex-1 overflow-y-auto">
         <div className="border-b border-[#1a1a1a] px-8 py-7 flex items-center justify-between">
           <div>
-            <h1 className="font-crimson text-[52px] leading-none italic">Terminal Dashboard</h1>
+            <h1 className="font-crimson text-[52px] leading-none italic">System Console</h1>
             <p className="mt-2 text-[9px] uppercase tracking-[1px] text-[#4a4a4a]">Data Synthesis Environment</p>
           </div>
           <Link
@@ -352,7 +351,7 @@ const Dashboard = () => {
                             <div className="flex items-center justify-between">
                               <FileText className="h-4 w-4" />
                               <div className="flex items-center gap-2">
-                                <div className="border border-[#1a1a1a] px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-semibold bg-emerald-50 text-emerald-900 border-emerald-700">Live</div>
+                                <div className="border px-2.5 py-0.5 text-[9px] uppercase tracking-[1.5px] font-semibold bg-emerald-50 text-emerald-900 border-emerald-700">Live</div>
                                 <Link
                                   to={`/app/forms/${form._id}/edit`}
                                   className="inline-flex h-7 w-7 items-center justify-center border border-[#1a1a1a] bg-[#f5f5f0] hover:bg-white"
