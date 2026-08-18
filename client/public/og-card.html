@@ -2,17 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>CipherForm Minimal OG Image</title>
+  <title>CipherForm OG Card</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
       width: 1200px;
       height: 630px;
-      background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #f5f5f0;
+      color: #1a1a1a;
+      font-family: 'Inter', -apple-system, sans-serif;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -20,114 +21,137 @@
       position: relative;
     }
 
+    .frame-border {
+      position: absolute;
+      inset: 28px;
+      border: 1.5px solid #1a1a1a;
+      pointer-events: none;
+    }
+
     .content-left {
       max-width: 630px;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
+      z-index: 10;
     }
 
     .logo-row {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       margin-bottom: 24px;
     }
 
     .logo-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: #0f172a;
+      width: 38px;
+      height: 38px;
+      background: #1a1a1a;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .logo-text {
-      font-size: 30px;
-      font-weight: 800;
-      color: #0f172a;
-      letter-spacing: -0.8px;
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background-color: #16a34a;
-      color: #ffffff;
-      padding: 6px 18px;
-      border-radius: 9999px;
-      font-size: 15px;
-      font-weight: 700;
-      letter-spacing: -0.2px;
+      background-color: #1a1a1a;
+      color: #f5f5f0;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
       margin-bottom: 22px;
     }
 
     .headline {
-      font-size: 46px;
-      line-height: 1.15;
-      font-weight: 800;
-      color: #0f172a;
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 54px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+      color: #1a1a1a;
       letter-spacing: -1.5px;
-      margin-bottom: 16px;
+      margin-bottom: 18px;
     }
 
     .description {
-      font-size: 20.5px;
+      font-size: 19.5px;
       line-height: 1.45;
-      color: #475569;
+      color: #4a4a4a;
       font-weight: 400;
       margin-bottom: 32px;
     }
 
     .btn {
-      background-color: #2563eb;
-      color: #ffffff;
+      background-color: #1a1a1a;
+      color: #f5f5f0;
       padding: 14px 34px;
-      border-radius: 10px;
-      font-size: 17px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       font-weight: 700;
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+      letter-spacing: 1.5px;
+      box-shadow: 3px 3px 0px 0px black;
       border: none;
       display: inline-flex;
       align-items: center;
     }
 
-    /* Right side 3D Squircle Icon */
+    /* Right side Stark Obsidian Card */
     .icon-container {
       width: 330px;
       height: 330px;
-      border-radius: 72px;
-      background: linear-gradient(145deg, #38bdf8 0%, #3b82f6 50%, #2563eb 100%);
-      box-shadow: 0 24px 50px -10px rgba(37, 99, 235, 0.35);
+      border-radius: 36px;
+      background: #1a1a1a;
+      border: 2px solid #1a1a1a;
+      box-shadow: 8px 8px 0px 0px black;
       display: flex;
       align-items: center;
       justify-content: center;
       position: relative;
+      z-index: 10;
+    }
+
+    .inner-dashed {
+      position: absolute;
+      inset: 16px;
+      border-radius: 24px;
+      border: 1.5px dashed #333333;
+      pointer-events: none;
     }
 
     .shield-svg {
-      width: 180px;
-      height: 180px;
-      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+      width: 175px;
+      height: 175px;
     }
   </style>
 </head>
 <body>
+  <div class="frame-border"></div>
+
   <div class="content-left">
     <div class="logo-row">
       <div class="logo-icon">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L18 6V12C18 16 15 19.5 12 21C9 19.5 6 16 6 12V6L12 3Z" fill="#f5f5f0"/>
+          <circle cx="12" cy="12" r="2" fill="#1a1a1a"/>
         </svg>
       </div>
       <span class="logo-text">CipherForm</span>
     </div>
 
     <div class="badge">
-      <span>🔒 100% Local &amp; Private</span>
+      <span>🔒 100% LOCAL &amp; PRIVATE</span>
     </div>
 
     <h1 class="headline">
@@ -135,20 +159,21 @@
     </h1>
 
     <p class="description">
-      Build encrypted forms and query responses with Gemini RAG.<br>100% private, zero bytes uploaded to servers.
+      Convert responses into actionable insights with Gemini RAG.<br>100% private at rest, 0 bytes exposed to untrusted servers.
     </p>
 
     <div class="btn">
-      Start Free
+      START FREE →
     </div>
   </div>
 
   <div class="icon-container">
+    <div class="inner-dashed"></div>
     <svg class="shield-svg" viewBox="0 0 64 64" fill="none">
-      <path d="M32 10L50 17V31C50 42.5 42.4 52.8 32 56C21.6 52.8 14 42.5 14 31V17L32 10Z" fill="white" fill-opacity="0.95" stroke="white" stroke-width="2" stroke-linejoin="round"/>
-      <path d="M37 24C34.5 22.5 30 22.5 27 24.5C24 26.5 23 30 23 33.5C23 37 24.5 40.5 27.5 42C30.5 43.5 34.5 43 37 41" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
-      <circle cx="32" cy="33" r="3.5" fill="#2563eb"/>
-      <path d="M32 36.5V41" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+      <path d="M32 8L49 16V31C49 43 40.5 53 32 56.5C23.5 53 15 43 15 31V16L32 8Z" fill="#f5f5f0" stroke="#f5f5f0" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M37 24C34.5 22.5 30 22.5 27 24.5C24 26.5 23 30 23 33.5C23 37 24.5 40.5 27.5 42C30.5 43.5 34.5 43 37 41" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="32" cy="33" r="3.2" fill="#1a1a1a"/>
+      <path d="M32 36.5V41" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
     </svg>
   </div>
 </body>

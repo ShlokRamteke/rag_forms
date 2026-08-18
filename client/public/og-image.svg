@@ -1,84 +1,88 @@
 <svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Background subtle gradient -->
-    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f8fafc"/>
-      <stop offset="100%" stop-color="#f1f5f9"/>
-    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap');
 
-    <!-- Right 3D Icon Squircle Vibrant Gradient -->
-    <linearGradient id="icon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8"/>
-      <stop offset="50%" stop-color="#3b82f6"/>
-      <stop offset="100%" stop-color="#2563eb"/>
-    </linearGradient>
+      .font-crimson {
+        font-family: 'Crimson Pro', Georgia, serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .font-sans {
+        font-family: 'Inter', -apple-system, sans-serif;
+      }
+    </style>
 
-    <!-- 3D Squircle Drop Shadow -->
-    <filter id="icon-shadow" x="700" y="100" width="450" height="450" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="24" stdDeviation="30" flood-color="#2563eb" flood-opacity="0.32"/>
+    <!-- Sharp Stark Shadow for 3D Icon Card -->
+    <filter id="card-shadow" x="730" y="130" width="370" height="370" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="8" dy="8" stdDeviation="0" flood-color="#1a1a1a" flood-opacity="1"/>
     </filter>
 
-    <!-- Button Drop Shadow -->
-    <filter id="btn-shadow" x="72" y="460" width="200" height="85" filterUnits="userSpaceOnUse">
-      <feDropShadow dx="0" dy="6" stdDeviation="12" flood-color="#2563eb" flood-opacity="0.35"/>
+    <!-- Button Shadow -->
+    <filter id="btn-shadow" x="75" y="460" width="220" height="70" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#1a1a1a" flood-opacity="1"/>
     </filter>
   </defs>
 
-  <!-- Clean Canvas Background -->
-  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+  <!-- CipherForm Core Cream Background (#f5f5f0) -->
+  <rect width="1200" height="630" fill="#f5f5f0"/>
 
-  <!-- ================= LEFT COLUMN CONTENT ================= -->
+  <!-- Subtle Outer Framing Border -->
+  <rect x="28" y="28" width="1144" height="574" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+
+  <!-- ================= LEFT COLUMN ================= -->
 
   <!-- Top Logo Row -->
-  <g transform="translate(80, 76)">
-    <!-- Dark Logo Icon Box -->
-    <rect width="40" height="40" rx="10" fill="#0f172a"/>
-    <path d="M20 10L28 14V21C28 26.5 24 30 20 31.5C16 30 12 26.5 12 21V14L20 10Z" fill="#38bdf8"/>
-    <circle cx="20" cy="20.5" r="2.5" fill="#0f172a"/>
-    
-    <!-- Logo Brand Name -->
-    <text x="54" y="29" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="30" font-weight="800" fill="#0f172a" letter-spacing="-0.8">CipherForm</text>
+  <g transform="translate(80, 82)">
+    <!-- Obsidian Icon Box -->
+    <rect width="38" height="38" fill="#1a1a1a"/>
+    <path d="M19 10L27 14V20C27 25 23.5 28.5 19 30C14.5 28.5 11 25 11 20V14L19 10Z" fill="#f5f5f0"/>
+    <circle cx="19" cy="19.5" r="2.5" fill="#1a1a1a"/>
+
+    <!-- Brand Name -->
+    <text x="50" y="27" class="font-crimson" font-size="34" font-weight="600" fill="#1a1a1a" letter-spacing="-0.5">CipherForm</text>
   </g>
 
-  <!-- Green Security Badge Pill -->
+  <!-- Security Badge Pill in #1a1a1a -->
   <g transform="translate(80, 150)">
-    <rect width="215" height="38" rx="19" fill="#16a34a"/>
+    <rect width="210" height="34" fill="#1a1a1a"/>
     <!-- Lock Icon -->
-    <path d="M22 20.5V17C22 14.8 23.8 13 26 13C28.2 13 30 14.8 30 17V20.5M19 20.5H33C33.8 20.5 34.5 21.2 34.5 22V27.5C34.5 28.3 33.8 29 33 29H19C18.2 29 17.5 28.3 17.5 27.5V22C17.5 21.2 18.2 20.5 19 20.5Z" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="44" y="24.5" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="15" font-weight="700" fill="white" letter-spacing="-0.2">100% Local &amp; Private</text>
+    <path d="M22 18.5V15.5C22 13.6 23.6 12 25.5 12C27.4 12 29 13.6 29 15.5V18.5M19 18.5H32C32.8 18.5 33.5 19.2 33.5 20V25C33.5 25.8 32.8 26.5 32 26.5H19C18.2 26.5 17.5 25.8 17.5 25V20C17.5 19.2 18.2 18.5 19 18.5Z" stroke="#f5f5f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="42" y="22" class="font-mono" font-size="11" font-weight="600" fill="#f5f5f0" letter-spacing="1">100% LOCAL &amp; PRIVATE</text>
   </g>
 
-  <!-- Big Bold Headline -->
-  <text x="80" y="254" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="800" fill="#0f172a" letter-spacing="-1.5">CipherForm – In-Browser</text>
-  <text x="80" y="312" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="46" font-weight="800" fill="#0f172a" letter-spacing="-1.5">Privacy AI Form Builder</text>
+  <!-- Main Headline in Crimson Pro Italic -->
+  <text x="80" y="248" class="font-crimson" font-size="54" font-style="italic" font-weight="400" fill="#1a1a1a" letter-spacing="-1.5">CipherForm – In-Browser</text>
+  <text x="80" y="310" class="font-crimson" font-size="54" font-style="italic" font-weight="400" fill="#1a1a1a" letter-spacing="-1.5">Privacy AI Form Builder</text>
 
-  <!-- Clean Subtitle / Description -->
-  <text x="80" y="374" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="20.5" font-weight="400" fill="#475569" letter-spacing="-0.2">Build encrypted forms and query responses with Gemini RAG.</text>
-  <text x="80" y="406" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="20.5" font-weight="400" fill="#475569" letter-spacing="-0.2">100% private, zero bytes uploaded to servers.</text>
+  <!-- Clean Subtitle in #4a4a4a -->
+  <text x="80" y="372" class="font-sans" font-size="19.5" font-weight="400" fill="#4a4a4a" letter-spacing="-0.2">Convert responses into actionable insights with Gemini RAG.</text>
+  <text x="80" y="404" class="font-sans" font-size="19.5" font-weight="400" fill="#4a4a4a" letter-spacing="-0.2">100% private at rest, 0 bytes exposed to untrusted servers.</text>
 
-  <!-- Primary Blue Button -->
+  <!-- Primary Terminal Button in #1a1a1a -->
   <g filter="url(#btn-shadow)">
-    <rect x="80" y="460" width="168" height="54" rx="10" fill="#2563eb"/>
-    <text x="119" y="494" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif" font-size="17" font-weight="700" fill="white" letter-spacing="-0.2">Start Free</text>
+    <rect x="80" y="458" width="180" height="52" fill="#1a1a1a"/>
+    <text x="170" y="490" text-anchor="middle" class="font-mono" font-size="12" font-weight="700" fill="#f5f5f0" letter-spacing="1.5">START FREE →</text>
   </g>
 
-  <!-- ================= RIGHT COLUMN 3D SQUIRCLE ================= -->
-  <g filter="url(#icon-shadow)">
-    <!-- 330x330 Rounded Squircle -->
-    <rect x="750" y="140" width="330" height="330" rx="72" fill="url(#icon-grad)"/>
+  <!-- ================= RIGHT COLUMN ICON CARD ================= -->
+  <g filter="url(#card-shadow)">
+    <!-- 330x330 Stark Obsidian Card (#1a1a1a) -->
+    <rect x="745" y="140" width="330" height="330" rx="36" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="2"/>
     
-    <!-- Top-Left Inner Glow Arc -->
-    <path d="M750 212C750 172.2 782.2 140 822 140H1008C1047.8 140 1080 172.2 1080 212V225C1080 225 1010 160 915 160C820 160 750 225 750 225V212Z" fill="white" fill-opacity="0.22"/>
+    <!-- Subtle Inner Dashed Border -->
+    <rect x="760" y="155" width="300" height="300" rx="26" stroke="#333333" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
 
-    <!-- Large Crisp White Shield & Circuit Loop Icon -->
-    <g transform="translate(825, 215)">
+    <!-- Large Elegant White (#f5f5f0) Shield & Loop Icon -->
+    <g transform="translate(820, 215)">
       <!-- Outer Shield Vault -->
-      <path d="M90 18L145 42V88C145 128 120 158 90 170C60 158 35 128 35 88V42L90 18Z" fill="white" fill-opacity="0.95" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+      <path d="M90 18L145 42V88C145 128 120 158 90 170C60 158 35 128 35 88V42L90 18Z" fill="#f5f5f0" stroke="#f5f5f0" stroke-width="3" stroke-linejoin="round"/>
       
-      <!-- Inner Dynamic Loop / Keyhole Geometry -->
-      <path d="M106 68C98 63 84 63 75 70C65 77 62 90 62 100C62 110 67 122 78 127C89 132 101 130 109 124" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
-      <circle cx="90" cy="99" r="9" fill="#2563eb"/>
-      <path d="M90 109V123" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+      <!-- Inner Obsidian Loop / Keyhole Node -->
+      <path d="M106 68C98 63 84 63 75 70C65 77 62 90 62 100C62 110 67 122 78 127C89 132 101 130 109 124" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="90" cy="99" r="9" fill="#1a1a1a"/>
+      <path d="M90 109V123" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
     </g>
   </g>
 </svg>
