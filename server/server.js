@@ -21,22 +21,33 @@ app.use((req, res, next) => {
   next();
 });
 
-const defaultOrigins = ["http://localhost:5173", "http://localhost:3000", "http://127.0.0.1:5173"];
+const defaultOrigins = [
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://127.0.0.1:5173",
+  "https://cipherforms.vercel.app",
+];
 const configuredOrigins = (process.env.CORS_ORIGIN || "")
   .split(",")
   .map((o) => o.trim())
   .filter(Boolean);
-const allowedOrigins = configuredOrigins.length ? configuredOrigins : defaultOrigins;
+const allowedOrigins = [...defaultOrigins, ...configuredOrigins];
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      // Allow requests with no origin (like mobile apps, curl, server-to-server, keep-alive)
       if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+      // Allow if wildcard, in allowed list, or from any *.vercel.app deployment
+      if (
+        allowedOrigins.includes("*") ||
+        allowedOrigins.includes(origin) ||
+        origin.endsWith(".vercel.app")
+      ) {
         return callback(null, true);
       }
-      return callback(new Error("Blocked by CORS policy"));
+      console.warn(`[CORS] Blocked request from unauthorized origin: ${origin}`);
+      return callback(new Error(`Blocked by CORS policy for origin: ${origin}`));
     },
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
