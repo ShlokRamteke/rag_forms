@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CipherForm OG Image</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      background-color: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 72px 84px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    /* Background subtle ambient glows */
+    .glow-1 {
+      position: absolute;
+      top: -120px;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, rgba(248, 250, 252, 0) 70%);
+      pointer-events: none;
+    }
+    .glow-2 {
+      position: absolute;
+      bottom: -150px;
+      left: 100px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.08) 0%, rgba(248, 250, 252, 0) 70%);
+      pointer-events: none;
+    }
+
+    .content-left {
+      max-width: 620px;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: #1e293b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-size: 30px;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.8px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #15803d;
+      color: #ffffff;
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+      margin-bottom: 20px;
+    }
+
+    .headline {
+      font-size: 46px;
+      line-height: 1.15;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -1.4px;
+      margin-bottom: 16px;
+    }
+
+    .description {
+      font-size: 20px;
+      line-height: 1.45;
+      color: #475569;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      background-color: #2563eb;
+      color: #ffffff;
+      padding: 14px 32px;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35);
+      border: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Right side 3D Icon Card */
+    .icon-container {
+      width: 320px;
+      height: 320px;
+      border-radius: 64px;
+      background: linear-gradient(145deg, #38bdf8 0%, #3b82f6 50%, #2563eb 100%);
+      box-shadow: 0 24px 50px -12px rgba(37, 99, 235, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .shield-svg {
+      width: 170px;
+      height: 170px;
+      filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+    }
+  </style>
+</head>
+<body>
+  <div class="glow-1"></div>
+  <div class="glow-2"></div>
+
+  <div class="content-left">
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#38bdf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <span class="logo-text">CipherForm</span>
+    </div>
+
+    <div class="badge">
+      <span>🔒 100% Encrypted &amp; Zero-Knowledge</span>
+    </div>
+
+    <h1 class="headline">
+      CipherForm – Privacy-First AI Form Builder
+    </h1>
+
+    <p class="description">
+      Build encrypted forms and query responses conversationally using Gemini RAG vector intelligence. 100% private at rest.
+    </p>
+
+    <div class="btn">
+      Start Free
+    </div>
+  </div>
+
+  <div class="icon-container">
+    <svg class="shield-svg" viewBox="0 0 64 64" fill="none">
+      <!-- Shield Frame -->
+      <path d="M32 10L50 17V31C50 42.5 42.4 52.8 32 56C21.6 52.8 14 42.5 14 31V17L32 10Z" fill="white" fill-opacity="0.95" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+      
+      <!-- Internal Cipher Keyhole Geometry -->
+      <path d="M37 24C34.5 22.5 30 22.5 27 24.5C24 26.5 23 30 23 33.5C23 37 24.5 40.5 27.5 42C30.5 43.5 34.5 43 37 41" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="32" cy="33" r="3.5" fill="#2563eb"/>
+      <path d="M32 36.5V41" stroke="#2563eb" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+</body>
+</html>
