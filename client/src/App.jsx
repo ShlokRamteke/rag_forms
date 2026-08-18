@@ -5,7 +5,6 @@ import Dashboard from './pages/Dashboard';
 import CreateForm from './pages/CreateForm';
 import ChatInterface from './pages/ChatInterface';
 import PublicForm from './pages/PublicForm';
-import PrivateAnalysis from './pages/PrivateAnalysis';
 
 function App() {
   return (
@@ -13,7 +12,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/share/:id" element={<PublicForm />} />
-        <Route path="/private/:id" element={<PrivateAnalysis />} />
         <Route
           path="/app/*"
           element={
@@ -21,6 +19,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Dashboard />} />
                 <Route path="/forms/new" element={<CreateForm />} />
+                <Route path="/forms/:id/edit" element={<CreateForm />} />
                 <Route path="/forms/:id" element={<ChatInterface />} />
               </Routes>
             </AdminGate>
