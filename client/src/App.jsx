@@ -1,96 +1,38 @@
-import React, { useState, useEffect } from "react";
-
-import "./App.css";
-import instance from "./axios.js";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import AdminGate from './components/AdminGate';
+import Landing from './pages/Landing';
+import Dashboard from './pages/Dashboard';
+import CreateForm from './pages/CreateForm';
+import ChatInterface from './pages/ChatInterface';
+import PublicForm from './pages/PublicForm';
 
 function App() {
-  const [forms, setForms] = useState([]);
-  const [selectedForm, setSelectedForm] = useState(null);
-  const [question, setQuestion] = useState("");
-  const [analysis, setAnalysis] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  //console.log(selectedForm);
-
-  useEffect(() => {
-    fetchForms();
-  }, []);
-
-  const fetchForms = async () => {
-    try {
-      const response = await instance.get("/api/forms");
-
-      setForms(response.data);
-      //console.log("forms", forms);
-    } catch (error) {
-      console.error("Error fetching forms:", error);
-    }
-  };
-  const handleFormSelect = (e) => {
-    const selectedFormId = e.target.value;
-    const selectedForm = forms.find((form) => form._id === selectedFormId);
-
-    setSelectedForm(selectedForm);
-  };
-
-  const handleQuestionSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await instance.post("/api/analyze", {
-        formId: selectedForm._id,
-        question,
-      });
-      setAnalysis(response.data);
-    } catch (error) {
-      console.error("Error analyzing question:", error);
-      setAnalysis({ error: "An error occurred during analysis" });
-    } finally {
-      setLoading(false);
-    }
-  };
-
   return (
-    <div className="app-container">
-      <div className="app-content">
-        <h1>Form Analysis</h1>
-        <div className="form-selection">
-          <label htmlFor="form-select">Select a form:</label>
-          <select id="form-select" onChange={handleFormSelect}>
-            <option value="">Choose a form</option>
-            {forms.map((form) => (
-              <option key={form._id} value={form._id}>
-                {form.name}
-              </option>
-            ))}
-          </select>
-        </div>
-        {selectedForm && (
-          <div className="question-form">
-            <h2>Ask a question</h2>
-            <form onSubmit={handleQuestionSubmit}>
-              <textarea
-                value={question}
-                onChange={(e) => setQuestion(e.target.value)}
-                placeholder="Type your question here..."
-                rows="4"
-              />
-              <button type="submit" disabled={loading}>
-                {loading ? "Analyzing..." : "Analyze"}
-              </button>
-            </form>
-          </div>
-        )}
-        {analysis && (
-          <div className="analysis-result">
-            <h2>Analysis Result</h2>
-            <p>
-              <strong>Answer:</strong> {analysis.answer}
-            </p>
-          </div>
-        )}
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/share/:id" element={<PublicForm />} />
+        <Route
+          path="/app/*"
+          element={
+            <AdminGate>
+              <Routes>
+                <Route path="/" element={<Dashboard />} />
+                <Route path="/forms/new" element={<CreateForm />} />
+                <Route path="/forms/:id/edit" element={<CreateForm />} />
+                <Route path="/forms/:id" element={<ChatInterface />} />
+              </Routes>
+            </AdminGate>
+          }
+        />
+        <Route
+          path="*"
+          element={
+            <Landing />
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
