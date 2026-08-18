@@ -16,7 +16,7 @@ const Layout = ({ children }) => {
                 <div className="p-6 border-b border-gray-200">
                     <h1 className="text-xl font-bold flex items-center gap-2 text-indigo-600">
                         <Database className="w-6 h-6" />
-                        RAG Forms
+                        CipherForm
                     </h1>
                 </div>
                 <nav className="p-4">

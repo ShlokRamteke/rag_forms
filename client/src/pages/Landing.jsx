@@ -8,7 +8,7 @@ const Landing = () => {
     <div className="bg-[#f5f5f0] text-[#1a1a1a]">
       <header className="border-b border-[#1a1a1a] px-8">
         <div className="mx-auto flex h-20 max-w-[1400px] items-center justify-between">
-          <div className="font-crimson text-2xl uppercase tracking-[-0.48px]">RAG Forms</div>
+          <div className="font-crimson text-2xl uppercase tracking-[-0.48px]">CipherForm</div>
           <nav className="hidden items-center gap-12 text-[10px] font-semibold uppercase tracking-[2px] md:flex">
             <a href="#product">Product</a>
             <a href="#pillars">Pillars</a>
@@ -178,7 +178,7 @@ const Landing = () => {
                 Semantic Retrieval Protocol
               </h2>
               <p className="text-[16px] font-light leading-[26px] text-white/70">
-                RAG Forms leverages Gemini Embeddings to index and query your datasets. Response payloads are partitioned, vectorized, and parsed inside isolated memory perimeters. 
+                CipherForm leverages Gemini Embeddings to index and query your datasets. Response payloads are partitioned, vectorized, and parsed inside isolated memory perimeters. 
               </p>
               <div className="border-l-2 border-[#f5f5f0] pl-6 py-1 text-[14px] italic text-white/60">
                 "Compile complex, multi-variable insights in natural language without exposing raw database records to the querying terminal."
@@ -251,7 +251,7 @@ const Landing = () => {
         <div className="mx-auto max-w-[1400px]">
           <div className="grid grid-cols-1 gap-10 border-b border-[#1a1a1a] pb-12 md:grid-cols-[1fr_268px_268px]">
             <div>
-              <div className="font-crimson text-[30px] uppercase">RAG Forms</div>
+              <div className="font-crimson text-[30px] uppercase">CipherForm</div>
               <p className="mt-6 max-w-[384px] text-[14px] font-light leading-[22.75px] text-[#4a4a4a]">
                 The architectural standard for encrypted data collection. Built for teams that prioritize structural integrity.
               </p>
@@ -275,7 +275,7 @@ const Landing = () => {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-4 pt-12 text-[10px] font-semibold uppercase tracking-[1px] text-[#4a4a4a]">
-            <div>© 2026 RAG Forms Protocol. All rights reserved.</div>
+            <div>© 2026 CipherForm Protocol. All rights reserved.</div>
             <div className="flex gap-12">
               <span>AES-256-GCM Protection</span>
               <span>Architectural Grade</span>
