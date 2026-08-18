@@ -39,7 +39,7 @@ const PRIVACY_DESCRIPTIONS = {
     analyzable: 'Content included in AI context for analytics. Suitable for non-sensitive fields.',
 };
 
-const DRAFT_STORAGE_KEY = 'rag_forms:create_form_draft:v1';
+const DRAFT_STORAGE_KEY = 'cipherform:create_form_draft:v1';
 
 const createEmptyField = (required = false) => ({
     label: '',
@@ -80,7 +80,7 @@ const CreateForm = () => {
     const { id } = useParams();
     const [searchParams] = useSearchParams();
     const draftKey = searchParams.get('draft') || 'create-form';
-    const draftStorageKey = `rag_forms:create_form_draft:${draftKey}`;
+    const draftStorageKey = `cipherform:create_form_draft:${draftKey}`;
     const isEditMode = Boolean(id);
 
     const [name, setName] = useState('');

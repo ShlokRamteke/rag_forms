@@ -20,7 +20,7 @@ const Sidebar = () => {
     return (
         <aside className="w-64 border-r border-[#1a1a1a] bg-[#f5f5f0] flex flex-col shrink-0 h-full">
             <div className="border-b border-[#1a1a1a] px-6 py-8">
-                <div className="font-crimson text-[32px] leading-none">RAG FORMS</div>
+                <div className="font-crimson text-[32px] leading-none">CIPHERFORM</div>
                 <div className="mt-2 text-[8px] uppercase tracking-[2.4px] text-[#4a4a4a]">System Core v4.0.2</div>
             </div>
             <div className="flex-1 px-6 py-8 text-[10px] uppercase tracking-[2px]">

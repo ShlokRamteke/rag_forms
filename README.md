@@ -1,4 +1,4 @@
-# RAG Forms 🛡️🤖
+# CipherForm 🛡️🤖
 
 > **Privacy-First Form Builder & Intelligent RAG Analytics Engine**  
 > Build dynamic forms, encrypt sensitive respondent data with AES-256-GCM, and query unstructured form submissions conversationally using semantic vector search and Google Gemini.
