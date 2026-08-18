@@ -25,6 +25,10 @@ pnpm-debug.log*
 # Antigravity IDE and internal artifacts
 .antigravity/
 
+# Screenshots & Local media
+screenshots/
+client/public/screenshots/
+
 # OS and Editor files
 .DS_Store
 .DS_Store?

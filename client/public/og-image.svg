@@ -1,0 +1,88 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;0,700;1,400;1,600&amp;family=Inter:wght@400;500;600&amp;family=JetBrains+Mono:wght@500;600;700&amp;display=swap');
+
+      .font-crimson {
+        font-family: 'Crimson Pro', Georgia, serif;
+      }
+      .font-mono {
+        font-family: 'JetBrains Mono', monospace;
+      }
+      .font-sans {
+        font-family: 'Inter', -apple-system, sans-serif;
+      }
+    </style>
+
+    <!-- Sharp Stark Shadow for 3D Icon Card -->
+    <filter id="card-shadow" x="730" y="130" width="370" height="370" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="8" dy="8" stdDeviation="0" flood-color="#1a1a1a" flood-opacity="1"/>
+    </filter>
+
+    <!-- Button Shadow -->
+    <filter id="btn-shadow" x="75" y="460" width="220" height="70" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="3" dy="3" stdDeviation="0" flood-color="#1a1a1a" flood-opacity="1"/>
+    </filter>
+  </defs>
+
+  <!-- CipherForm Core Cream Background (#f5f5f0) -->
+  <rect width="1200" height="630" fill="#f5f5f0"/>
+
+  <!-- Subtle Outer Framing Border -->
+  <rect x="28" y="28" width="1144" height="574" stroke="#1a1a1a" stroke-width="1.5" fill="none"/>
+
+  <!-- ================= LEFT COLUMN ================= -->
+
+  <!-- Top Logo Row -->
+  <g transform="translate(80, 82)">
+    <!-- Obsidian Icon Box -->
+    <rect width="38" height="38" fill="#1a1a1a"/>
+    <path d="M19 10L27 14V20C27 25 23.5 28.5 19 30C14.5 28.5 11 25 11 20V14L19 10Z" fill="#f5f5f0"/>
+    <circle cx="19" cy="19.5" r="2.5" fill="#1a1a1a"/>
+
+    <!-- Brand Name -->
+    <text x="50" y="27" class="font-crimson" font-size="34" font-weight="600" fill="#1a1a1a" letter-spacing="-0.5">CipherForm</text>
+  </g>
+
+  <!-- Security Badge Pill in #1a1a1a -->
+  <g transform="translate(80, 150)">
+    <rect width="210" height="34" fill="#1a1a1a"/>
+    <!-- Lock Icon -->
+    <path d="M22 18.5V15.5C22 13.6 23.6 12 25.5 12C27.4 12 29 13.6 29 15.5V18.5M19 18.5H32C32.8 18.5 33.5 19.2 33.5 20V25C33.5 25.8 32.8 26.5 32 26.5H19C18.2 26.5 17.5 25.8 17.5 25V20C17.5 19.2 18.2 18.5 19 18.5Z" stroke="#f5f5f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="42" y="22" class="font-mono" font-size="11" font-weight="600" fill="#f5f5f0" letter-spacing="1">100% LOCAL &amp; PRIVATE</text>
+  </g>
+
+  <!-- Main Headline in Crimson Pro Italic -->
+  <text x="80" y="248" class="font-crimson" font-size="54" font-style="italic" font-weight="400" fill="#1a1a1a" letter-spacing="-1.5">CipherForm – In-Browser</text>
+  <text x="80" y="310" class="font-crimson" font-size="54" font-style="italic" font-weight="400" fill="#1a1a1a" letter-spacing="-1.5">Privacy AI Form Builder</text>
+
+  <!-- Clean Subtitle in #4a4a4a -->
+  <text x="80" y="372" class="font-sans" font-size="19.5" font-weight="400" fill="#4a4a4a" letter-spacing="-0.2">Convert responses into actionable insights with Gemini RAG.</text>
+  <text x="80" y="404" class="font-sans" font-size="19.5" font-weight="400" fill="#4a4a4a" letter-spacing="-0.2">100% private at rest, 0 bytes exposed to untrusted servers.</text>
+
+  <!-- Primary Terminal Button in #1a1a1a -->
+  <g filter="url(#btn-shadow)">
+    <rect x="80" y="458" width="180" height="52" fill="#1a1a1a"/>
+    <text x="170" y="490" text-anchor="middle" class="font-mono" font-size="12" font-weight="700" fill="#f5f5f0" letter-spacing="1.5">START FREE →</text>
+  </g>
+
+  <!-- ================= RIGHT COLUMN ICON CARD ================= -->
+  <g filter="url(#card-shadow)">
+    <!-- 330x330 Stark Obsidian Card (#1a1a1a) -->
+    <rect x="745" y="140" width="330" height="330" rx="36" fill="#1a1a1a" stroke="#1a1a1a" stroke-width="2"/>
+    
+    <!-- Subtle Inner Dashed Border -->
+    <rect x="760" y="155" width="300" height="300" rx="26" stroke="#333333" stroke-width="1.5" stroke-dasharray="4 4" fill="none"/>
+
+    <!-- Large Elegant White (#f5f5f0) Shield & Loop Icon -->
+    <g transform="translate(820, 215)">
+      <!-- Outer Shield Vault -->
+      <path d="M90 18L145 42V88C145 128 120 158 90 170C60 158 35 128 35 88V42L90 18Z" fill="#f5f5f0" stroke="#f5f5f0" stroke-width="3" stroke-linejoin="round"/>
+      
+      <!-- Inner Obsidian Loop / Keyhole Node -->
+      <path d="M106 68C98 63 84 63 75 70C65 77 62 90 62 100C62 110 67 122 78 127C89 132 101 130 109 124" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="90" cy="99" r="9" fill="#1a1a1a"/>
+      <path d="M90 109V123" stroke="#1a1a1a" stroke-width="8" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>

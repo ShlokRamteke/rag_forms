@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CipherForm OG Card</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400;1,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      width: 1200px;
+      height: 630px;
+      background-color: #f5f5f0;
+      color: #1a1a1a;
+      font-family: 'Inter', -apple-system, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 76px 84px;
+      position: relative;
+    }
+
+    .frame-border {
+      position: absolute;
+      inset: 28px;
+      border: 1.5px solid #1a1a1a;
+      pointer-events: none;
+    }
+
+    .content-left {
+      max-width: 630px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      z-index: 10;
+    }
+
+    .logo-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 34px;
+      font-weight: 600;
+      color: #1a1a1a;
+      letter-spacing: -0.5px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #1a1a1a;
+      color: #f5f5f0;
+      padding: 6px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      margin-bottom: 22px;
+    }
+
+    .headline {
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 54px;
+      font-style: italic;
+      font-weight: 400;
+      line-height: 1.1;
+      color: #1a1a1a;
+      letter-spacing: -1.5px;
+      margin-bottom: 18px;
+    }
+
+    .description {
+      font-size: 19.5px;
+      line-height: 1.45;
+      color: #4a4a4a;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      background-color: #1a1a1a;
+      color: #f5f5f0;
+      padding: 14px 34px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      box-shadow: 3px 3px 0px 0px black;
+      border: none;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    /* Right side Stark Obsidian Card */
+    .icon-container {
+      width: 330px;
+      height: 330px;
+      border-radius: 36px;
+      background: #1a1a1a;
+      border: 2px solid #1a1a1a;
+      box-shadow: 8px 8px 0px 0px black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 10;
+    }
+
+    .inner-dashed {
+      position: absolute;
+      inset: 16px;
+      border-radius: 24px;
+      border: 1.5px dashed #333333;
+      pointer-events: none;
+    }
+
+    .shield-svg {
+      width: 175px;
+      height: 175px;
+    }
+  </style>
+</head>
+<body>
+  <div class="frame-border"></div>
+
+  <div class="content-left">
+    <div class="logo-row">
+      <div class="logo-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+          <path d="M12 3L18 6V12C18 16 15 19.5 12 21C9 19.5 6 16 6 12V6L12 3Z" fill="#f5f5f0"/>
+          <circle cx="12" cy="12" r="2" fill="#1a1a1a"/>
+        </svg>
+      </div>
+      <span class="logo-text">CipherForm</span>
+    </div>
+
+    <div class="badge">
+      <span>🔒 100% LOCAL &amp; PRIVATE</span>
+    </div>
+
+    <h1 class="headline">
+      CipherForm – In-Browser<br>Privacy AI Form Builder
+    </h1>
+
+    <p class="description">
+      Convert responses into actionable insights with Gemini RAG.<br>100% private at rest, 0 bytes exposed to untrusted servers.
+    </p>
+
+    <div class="btn">
+      START FREE →
+    </div>
+  </div>
+
+  <div class="icon-container">
+    <div class="inner-dashed"></div>
+    <svg class="shield-svg" viewBox="0 0 64 64" fill="none">
+      <path d="M32 8L49 16V31C49 43 40.5 53 32 56.5C23.5 53 15 43 15 31V16L32 8Z" fill="#f5f5f0" stroke="#f5f5f0" stroke-width="2" stroke-linejoin="round"/>
+      <path d="M37 24C34.5 22.5 30 22.5 27 24.5C24 26.5 23 30 23 33.5C23 37 24.5 40.5 27.5 42C30.5 43.5 34.5 43 37 41" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="32" cy="33" r="3.2" fill="#1a1a1a"/>
+      <path d="M32 36.5V41" stroke="#1a1a1a" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+  </div>
+</body>
+</html>
