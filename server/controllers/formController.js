@@ -290,6 +290,21 @@ function validateFormDefinition(name, fields) {
                 throw new Error(`Dropdown field "${field.label || field.key}" requires options.`);
             }
         }
+        const pattern = field?.config?.validation?.pattern;
+        if (pattern) {
+            const patternStr = String(pattern).trim();
+            if (patternStr.length > 100) {
+                throw new Error(`Pattern for field "${field.label || field.key}" exceeds maximum limit of 100 characters.`);
+            }
+            if (/(\+|\*|\{[0-9]+,\})\s*\)\s*(\+|\*|\{[0-9]+,\})/.test(patternStr)) {
+                throw new Error(`Pattern for field "${field.label || field.key}" contains unsafe exponential expressions.`);
+            }
+            try {
+                new RegExp(patternStr);
+            } catch (err) {
+                throw new Error(`Invalid regex pattern for field "${field.label || field.key}": ${err.message}`);
+            }
+        }
     });
 }
 
@@ -307,7 +322,9 @@ export function validateAndSanitizeResponse(fields, data) {
 
         if (field.required) {
             if (type === "boolean") {
-                if (value !== true) throw new Error(`"${key}" is required.`);
+                if (value === undefined || value === null || value === "") {
+                    throw new Error(`"${key}" is required.`);
+                }
             } else if (value === undefined || value === null || value === "") {
                 throw new Error(`"${key}" is required.`);
             }
@@ -453,17 +470,31 @@ async function createForm(req, res) {
         const sanitizedName = sanitizeString(name, 200);
         validateFormDefinition(sanitizedName, sanitizedFields);
 
+        const effectivePrivacyMode = privacyMode === "none" ? "none" : "encrypted";
+
         const embeddedResponses = await Promise.all(
             (responses || []).slice(0, 100).map(async (response) => {
                 const data = response?.data ?? response;
                 const cleanedData = validateAndSanitizeResponse(sanitizedFields, data);
                 const analysisData = buildAnalysisData(sanitizedFields, cleanedData);
-                return {
-                    mode: "plaintext",
-                    data: cleanedData,
-                    analysisData,
-                    embedding: await ragService.generateEmbedding(JSON.stringify(analysisData)),
-                };
+                const embedding = await ragService.generateEmbedding(JSON.stringify(analysisData));
+
+                if (effectivePrivacyMode === "none") {
+                    return {
+                        mode: "plaintext",
+                        data: cleanedData,
+                        analysisData,
+                        embedding,
+                    };
+                } else {
+                    const encrypted = encryptForStorage(cleanedData);
+                    return {
+                        mode: "encrypted",
+                        ...encrypted,
+                        analysisData,
+                        embedding,
+                    };
+                }
             })
         );
 
@@ -473,7 +504,7 @@ async function createForm(req, res) {
             schema: { fields: sanitizedFields },
             schemaVersion: 1,
             fields: sanitizedFields,
-            privacyMode: privacyMode ?? "encrypted",
+            privacyMode: effectivePrivacyMode,
         });
         await form.save();
 
@@ -497,7 +528,7 @@ async function analyzeForm(req, res) {
         const ownerId = getRequesterOwnerId(req);
         if (!ownerId) return res.status(401).json({ error: "Unauthorized" });
         const { formId, question } = req.body;
-        if (!formId || typeof formId !== "string") {
+        if (!formId || typeof formId !== "string" || !mongoose.Types.ObjectId.isValid(formId)) {
             return res.status(400).json({ error: "A valid formId is required" });
         }
         if (!question || typeof question !== "string" || !question.trim()) {
@@ -523,7 +554,7 @@ async function analyzeFormStream(req, res) {
         const ownerId = getRequesterOwnerId(req);
         if (!ownerId) return res.status(401).json({ error: "Unauthorized" });
         const { formId, question } = req.body;
-        if (!formId || typeof formId !== "string") {
+        if (!formId || typeof formId !== "string" || !mongoose.Types.ObjectId.isValid(formId)) {
             return res.status(400).json({ error: "A valid formId is required" });
         }
         if (!question || typeof question !== "string" || !question.trim()) {

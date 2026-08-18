@@ -14,7 +14,6 @@ const responseSchema = new mongoose.Schema(
     authTag: { type: String },
     privacyVersion: { type: Number, default: 1 },
     embedding: { type: [Number], required: true },
-    createdAt: { type: Date, default: Date.now },
   },
   { timestamps: true }
 );

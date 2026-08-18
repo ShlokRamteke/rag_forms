@@ -68,7 +68,10 @@ const PublicForm = () => {
             return numberValue;
         }
 
-        if (type === 'boolean') return Boolean(rawValue);
+        if (type === 'boolean') {
+            if (rawValue === '' || rawValue === null || rawValue === undefined) return null;
+            return rawValue === true || rawValue === 'true';
+        }
 
         if (type === 'object' || type === 'array' || type === 'json') {
             if (rawValue === '' || rawValue === null || rawValue === undefined) return null;
@@ -88,7 +91,9 @@ const PublicForm = () => {
 
         if (field?.required) {
             if (type === 'boolean') {
-                if (!rawValue) throw new Error(`"${field?.label ?? field?.key}" is required`);
+                if (rawValue === '' || rawValue === null || rawValue === undefined) {
+                    throw new Error(`"${field?.label ?? field?.key}" is required`);
+                }
             } else if (rawValue === '' || rawValue === null || rawValue === undefined) {
                 throw new Error(`"${field?.label ?? field?.key}" is required`);
             }

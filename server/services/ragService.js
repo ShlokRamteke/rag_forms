@@ -281,16 +281,20 @@ async function findSimilarResponses(formId, question, limit = 5, ownerId = null)
 function prepareContext(responses) {
     return responses
         .map((response, index) => {
-            const { embedding, ...rest } = response;
             const dataToContext = response.analysisData
                 ? { response_id: response._id, ...response.analysisData }
-                : response.data || rest;
+                : (response.data ? { response_id: response._id, ...response.data } : null);
+
+            if (!dataToContext) {
+                return `[Record #${index + 1}]\n[Encrypted Record - Metadata Redacted for Privacy]`;
+            }
 
             const readableData = Object.entries(dataToContext)
+                .filter(([key]) => !["encryptedData", "iv", "salt", "authTag", "embedding", "mode", "ownerId"].includes(key))
                 .map(([key, value]) => `- ${key}: ${value}`)
                 .join("\n");
 
-            return `[Record #${index + 1}]\n${readableData}`;
+            return `[Record #${index + 1}]\n${readableData || "[No readable metadata]"}`;
         })
         .join("\n\n");
 }
@@ -521,6 +525,9 @@ ${question}
 }
 
 async function generateWithLiveWebSocket(prompt, modelName = "gemini-3.1-flash-live-preview") {
+    if (typeof WebSocket === "undefined") {
+        return null;
+    }
     return new Promise((resolve, reject) => {
         const wsUrl = `wss://generativelanguage.googleapis.com/ws/google.ai.generativelanguage.v1beta.GenerativeService.BidiGenerateContent?key=${apiKey}`;
         const ws = new WebSocket(wsUrl);
