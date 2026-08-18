@@ -1,0 +1,95 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Background subtle gradient -->
+    <linearGradient id="bg-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+
+    <!-- Right Icon Squircle Vibrant Gradient -->
+    <linearGradient id="icon-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="45%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+
+    <!-- Soft Drop Shadow for the 3D Icon -->
+    <filter id="icon-shadow" x="720" y="90" width="440" height="440" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+      <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+      <feOffset dy="20"/>
+      <feGaussianBlur stdDeviation="24"/>
+      <feComposite in2="hardAlpha" operator="out"/>
+      <feColorMatrix type="matrix" values="0 0 0 0 0.145 0 0 0 0 0.388 0 0 0 0 0.921 0 0 0 0.35 0"/>
+      <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+      <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+    </filter>
+
+    <!-- Button Shadow -->
+    <filter id="btn-shadow" x="76" y="446" width="220" height="90" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#2563eb" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+
+  <!-- Canvas Background -->
+  <rect width="1200" height="630" fill="url(#bg-grad)"/>
+
+  <!-- Subtle ambient background glow -->
+  <circle cx="1050" cy="180" r="280" fill="#38bdf8" fill-opacity="0.08"/>
+  <circle cx="200" cy="550" r="260" fill="#6366f1" fill-opacity="0.05"/>
+
+  <!-- ================= LEFT COLUMN CONTENT ================= -->
+
+  <!-- Top Logo Row -->
+  <g transform="translate(84, 80)">
+    <!-- Logo Circle Icon -->
+    <circle cx="19" cy="19" r="19" fill="#2563eb"/>
+    <path d="M19 10L27 13.5V19.5C27 24.5 23.5 28 19 29.5C14.5 28 11 24.5 11 19.5V13.5L19 10Z" fill="white"/>
+    <circle cx="19" cy="19.5" r="2" fill="#2563eb"/>
+    
+    <!-- Logo Text -->
+    <text x="50" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="28" font-weight="800" fill="#0f172a" letter-spacing="-0.8">CipherForm</text>
+  </g>
+
+  <!-- Green Badge Pill -->
+  <g transform="translate(84, 150)">
+    <rect width="210" height="36" rx="18" fill="#16a34a"/>
+    <!-- Lock SVG Icon -->
+    <path d="M22 19.5V16.5C22 14.567 23.567 13 25.5 13C27.433 13 29 14.567 29 16.5V19.5M19.5 19.5H31.5C32.3284 19.5 33 20.1716 33 21V26C33 26.8284 32.3284 27.5 31.5 27.5H19.5C18.6716 27.5 18 26.8284 18 26V21C18 20.1716 18.6716 19.5 19.5 19.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="42" y="23.5" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="14" font-weight="700" fill="white" letter-spacing="-0.2">100% Local &amp; Private</text>
+  </g>
+
+  <!-- Main Headline (Two Lines) -->
+  <text x="84" y="252" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#0f172a" letter-spacing="-1.4">CipherForm – In-Browser</text>
+  <text x="84" y="308" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="46" font-weight="800" fill="#0f172a" letter-spacing="-1.4">Privacy AI Form Builder</text>
+
+  <!-- Description (Two Lines) -->
+  <text x="84" y="366" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="20" font-weight="400" fill="#334155" letter-spacing="-0.2">Build encrypted forms and query responses with Gemini RAG.</text>
+  <text x="84" y="398" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="20" font-weight="400" fill="#334155" letter-spacing="-0.2">100% private, zero bytes uploaded to untrusted servers.</text>
+
+  <!-- Primary Blue Button -->
+  <g filter="url(#btn-shadow)">
+    <rect x="84" y="446" width="168" height="54" rx="10" fill="#2563eb"/>
+    <text x="122" y="480" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="17" font-weight="700" fill="white" letter-spacing="-0.2">Start Free</text>
+  </g>
+
+  <!-- ================= RIGHT COLUMN 3D ICON ================= -->
+  <g filter="url(#icon-shadow)">
+    <!-- 320x320 Squircle Card -->
+    <rect x="760" y="135" width="340" height="340" rx="72" fill="url(#icon-grad)"/>
+    
+    <!-- Top-Left Inner Glow Highlight -->
+    <path d="M760 207C760 167.235 792.235 135 832 135H1028C1067.76 135 1100 167.235 1100 207V220C1100 220 1030 155 930 155C830 155 760 220 760 220V207Z" fill="white" fill-opacity="0.2"/>
+
+    <!-- Large White Cryptographic Shield / Loop Symbol -->
+    <g transform="translate(835, 210)">
+      <!-- Outer Shield Vault -->
+      <path d="M95 24L150 48V95C150 135 125 168 95 180C65 168 40 135 40 95V48L95 24Z" fill="white" fill-opacity="0.95" stroke="white" stroke-width="4" stroke-linejoin="round"/>
+      
+      <!-- Inner Dynamic Loop / Keyhole Geometry -->
+      <path d="M112 75C104 70 90 70 80 77C70 84 66 97 66 108C66 119 71 131 82 136C93 141 106 139 114 133" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+      <circle cx="95" cy="107" r="10" fill="#2563eb"/>
+      <path d="M95 117V132" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
