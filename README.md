@@ -1,120 +1,241 @@
-# Form Analysis Application
+# RAG Forms 🛡️🤖
 
-## Overview
+> **Privacy-First Form Builder & Intelligent RAG Analytics Engine**  
+> Build dynamic forms, encrypt sensitive respondent data with AES-256-GCM, and query unstructured form submissions conversationally using semantic vector search and Google Gemini.
 
-This application is a MERN (MongoDB, Express.js, React, Node.js) stack project that allows users to analyze form data using advanced natural language processing techniques. It implements a Retrieval-Augmented Generation (RAG) system to answer questions about form data, utilizing embeddings for efficient retrieval and Gemini for question-answering.
+---
 
+## 🌟 Key Features
 
-## Features
+- **📝 Dynamic Form Builder & Schema Designer:**
+  - Create customizable forms supporting text, textarea, number, email, tel, date, dropdowns (enum), booleans, and visual sections.
+  - Multi-draft auto-save (synced to MongoDB and browser `localStorage`) with quick-resume and draft management.
 
-- Form data storage and retrieval
-- Question-answering based on form data
-- Embedding-based similarity search for relevant form responses
-- Responsive web interface for interacting with the system
+- **🔒 Advanced Privacy & Cryptographic Storage:**
+  - **AES-256-GCM Authenticated Encryption:** Sensitive responses are encrypted at rest with unique IVs and authentication tags.
+  - **Granular Field Privacy Modes:**
+    - `private`: Encrypted at rest. Completely omitted from AI context.
+    - `derived`: Raw values encrypted; only non-sensitive metadata extracted (e.g. phone country codes, email domains).
+    - `redacted_analyzable`: PII (emails, phone numbers, identifiers) auto-redacted before semantic vectorization.
+    - `analyzable`: Clean text vectorized for rich semantic analytics.
 
-## Tech Stack
+- **🧠 Real-Time RAG AI Analytics:**
+  - Powered by **Google Gemini** models with automatic model fallback.
+  - **Semantic Vector Retrieval:** Computes 768-dimensional normalized embeddings for instant hybrid similarity lookup.
+  - **Conversational Memory & Query Condensation:** Multi-turn conversational context resolution (e.g., resolving pronouns like *"how did they rate the product?"*).
+  - **Real-Time Streaming:** Server-Sent Events (SSE) streaming with granular record citations and relevance confidence scores.
 
-- Frontend: React
-- Backend: Node.js with Express
-- Database: MongoDB
-- Embedding Model: Sentence Transformers (all-MiniLM-L6-v2)
-- Question-Answering Model: Google's Gemini
+- **🔐 Multi-Tenant Authentication (Clerk):**
+  - Full authentication powered by **Clerk** (`@clerk/react` & `@clerk/backend`).
+  - Strict tenant isolation: every form, draft, conversation, and response is scoped to `ownerId`.
+  - Public respondent links (`/share/:id`) require no login for smooth submission workflows.
 
-## Form Schema
+- **📊 Bulk Ingestion & CSV/JSON Uploads:**
+  - Upload CSV or JSON files with automated field mapping, batch encryption, and rate-limited vectorization (capped at 1,000 records per upload).
 
-The application uses the following MongoDB schema for storing form data:
+- **⚡ Production-Grade Security & Keep-Alive:**
+  - **Rate Limiting:** IP-based rate limiters on public submissions, queries, uploads, and AI chat.
+  - **Security Headers:** HSTS, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, strict CORS with preflight handling.
+  - **Prompt Injection Defense:** XML-boundary delimited prompt templates (`<context_data>`, `<chat_history>`, `<user_query>`).
+  - **Render.com Keep-Alive:** Integrated self-ping background worker and `/api/ping` endpoint to prevent free cloud instances from sleeping.
 
-```javascript
-const FormSchema = new mongoose.Schema({
-  name: String,
-  fields: [
-    {
-      name: String,
-      type: String,
-    },
-  ],
-  responses: [
-    {
-      data: mongoose.Schema.Types.Mixed,
-      embedding: [Number],
-    },
-  ],
-});
+---
+
+## 🏗️ Architecture & Data Flow
+
+```mermaid
+flowchart TD
+    subgraph Client ["Client (React + Vite + Tailwind)"]
+        FB["Form Builder / Drafts"]
+        PF["Public Form Submission (/share/:id)"]
+        AI["AI Chat Interface (SSE Stream)"]
+    end
+
+    subgraph Auth ["Authentication"]
+        CK["Clerk Auth (JWT Bearer)"]
+    end
+
+    subgraph Server ["Express.js API Server"]
+        RL["Rate Limiters & Security Middleware"]
+        FC["Form Controller"]
+        UC["Upload Controller (CSV / JSON)"]
+        RAG["RAG Service Engine"]
+        ENC["AES-256-GCM Encryptor / Redactor"]
+    end
+
+    subgraph Storage ["Database & AI"]
+        MG[(MongoDB: Forms, Drafts, Responses, Conversations)]
+        GEM["Google Gemini API (Embeddings & Generation)"]
+    end
+
+    Client -->|Clerk Bearer Token| Server
+    PF -->|Public POST /forms/:id/submit| RL --> FC
+    FB -->|PUT /api/drafts/:key| FC --> MG
+    FC --> ENC --> MG
+    FC --> RAG
+    UC --> ENC --> MG
+    AI -->|POST /api/analyze/stream| RAG
+    RAG -->|Semantic Vector Search| MG
+    RAG -->|Prompt Context + History| GEM
+    GEM -->|Stream Chunks + Citations| AI
 ```
 
-## Approach
+---
 
-### 1. Data Storage and Embedding
+## 🛡️ Field Privacy Policies
 
-1. The response data is stored in the data field.
-2. An embedding is generated for the response using a Sentence Transformers (all-MiniLM-L6-v2).
-3. The embedding is stored alongside the response data in the embedding field.
+| Policy | Storage Mode | Vector Indexing | Visible in AI Analysis? |
+| :--- | :--- | :--- | :--- |
+| **`private`** | AES-256-GCM Encrypted | Excluded from vector embedding | ❌ Never passed to AI |
+| **`derived`** | AES-256-GCM Encrypted | Safe metadata only (Domain, Country Code) | 🌐 Safe metadata only |
+| **`redacted_analyzable`** | AES-256-GCM Encrypted | PII Auto-Redacted (`[EMAIL]`, `[PHONE]`) | 🛡️ Sanitized text only |
+| **`analyzable`** | Encrypted or Plaintext | Full semantic embedding | 📊 Full field content |
 
-### 2. Retrieval-Augmented Generation (RAG)
+---
 
-When a user asks a question:
+## 📁 Repository Structure
 
-1. Retrieval:
+```
+rag_forms/
+├── client/                     # React Frontend (Vite, TailwindCSS)
+│   ├── src/
+│   │   ├── components/         # AdminGate, Sidebar, ResponsesGrid
+│   │   ├── pages/              # Dashboard, CreateForm, ChatInterface, PublicForm, Landing
+│   │   ├── utils/              # Seed data and helpers
+│   │   ├── axios.js            # Axios client with automated Clerk JWT interceptor
+│   │   ├── App.jsx             # React Router configuration
+│   │   └── main.jsx            # ClerkProvider & Root
+│   └── package.json
+│
+├── server/                     # Node.js Express Backend
+│   ├── controllers/            # formController.js, uploadController.js
+│   ├── middleware/             # adminAuth.js (Clerk), validateId.js (ObjectId check)
+│   ├── models/                 # Form.js, Response.js, Conversation.js, FormDraft.js
+│   ├── routes/                 # formRoutes.js (Rate limited & validated API routes)
+│   ├── services/               # ragService.js (Gemini RAG & Vector similarity)
+│   ├── config.js               # Environment config parser
+│   ├── server.js               # Express app, security headers, CORS & Keep-Alive worker
+│   └── package.json
+│
+└── README.md
+```
 
-- An embedding is generated for the user's question.
-- The system performs a similarity search using cosine similarity between the question embedding and the stored response embeddings.
-- The most relevant responses are retrieved.
+---
 
-2. Augmentation:
+## 📡 API Reference
 
-- The retrieved responses are used to create a context for the question.
+### Public Endpoints (Rate Limited)
+- `GET /ping` or `GET /api/ping`: Lightweight health check & uptime status.
+- `GET /api/forms/:id`: Fetch public form schema fields.
+- `POST /api/forms/:id/submit`: Submit form response (Rate limit: 30 requests / 10 min).
 
-3. Generation:
+### Authenticated Endpoints (Requires `Authorization: Bearer <clerk_jwt>`)
+- `GET /api/forms`: Retrieve all forms belonging to current user.
+- `POST /api/forms`: Create and publish a new form.
+- `GET /api/forms/:id/admin`: Fetch administrative form details and response counts.
+- `PUT /api/forms/:id`: Update form definition and privacy modes.
+- `DELETE /api/forms/:id`: Delete a form and cascade-delete all associated responses/conversations.
+- `GET /api/forms/:id/responses`: Paginated responses table with server-side decryption.
+- `POST /api/forms/:id/upload`: Upload CSV/JSON responses (Max 1,000 records per upload).
+- `GET /api/drafts`: List all in-progress draft forms.
+- `GET /api/drafts/:draftKey`: Fetch a specific draft schema.
+- `PUT /api/drafts/:draftKey`: Auto-save or update draft schema.
+- `DELETE /api/drafts/:draftKey`: Discard draft schema.
+- `POST /api/analyze`: Non-streaming RAG question answering.
+- `POST /api/analyze/stream`: Real-time SSE streaming RAG question answering with citations.
+- `GET /api/forms/:id/conversations`: Fetch recent AI conversation history.
+- `DELETE /api/forms/:id/conversations`: Clear conversation history.
 
-- The question and the augmented context are sent to the Gemini model.
-- Gemini generates an answer based on the provided context and question.
+---
 
-### 3. Question-Answering with Gemini
+## ⚙️ Environment Variables
 
-Google's Gemini model is used for the final question-answering step. Gemini takes the user's question and the context created from relevant form responses to generate an accurate and contextually appropriate answer.
+### Backend (`server/.env`)
+```ini
+PORT=5001
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/rag_forms
+GEMINI_API_KEY=AIzaSy...
+CLERK_SECRET_KEY=sk_test_...
+APP_DATA_KEY=your_secure_32_character_encryption_key_here
+CORS_ORIGIN=http://localhost:5173,http://localhost:3000
 
-## API Endpoints
+# Optional: Cloud keep-alive (Auto-detected on Render.com)
+RENDER_EXTERNAL_URL=https://your-backend.onrender.com
+```
 
-- `GET /api/forms:` Retrieve all forms
-- `POST /api/forms`: Create a new form
-- `POST /api/analyze`: Analyze a question for a specific form
+### Frontend (`client/.env`)
+```ini
+VITE_APP_API_URL=http://localhost:5001
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
+```
 
+---
 
-## Setup and Installation
+## 🚀 Quickstart & Local Setup
 
-1. Clone the repository:
+### Prerequisites
+- Node.js (v18+) or [Bun](https://bun.sh)
+- MongoDB Database (Local instance or MongoDB Atlas)
+- Google Gemini API Key ([Google AI Studio](https://aistudio.google.com/))
+- Clerk Application ([Clerk Dashboard](https://dashboard.clerk.com/))
 
-   ```
-   git clone https://github.com/ShlokRamteke/rag_forms.git
-   ```
+### 1. Clone Repository
+```bash
+git clone https://github.com/ShlokRamteke/rag_forms.git
+cd rag_forms
+```
 
-2. Install dependencies:
+### 2. Setup Backend
+```bash
+cd server
+npm install
+# or: bun install
 
-   ```
-   cd backend && npm install
-   cd ../frontend && npm install
+# Create .env file with your credentials
+cp .env.example .env
 
-   ```
+# Start server
+npm start
+# or: bun start
+```
 
-3. Set up environment variables:
+### 3. Setup Frontend
+```bash
+cd ../client
+npm install
+# or: bun install
 
-- Backend: Create a `.env` file with:
+# Create .env file with your credentials
+cp .env.example .env
 
-  ```
-  MONGODB_URI=your_mongodb_connection_string
-  GEMINI_API_KEY=your_gemini_api_key
-  PORT=you_port
-  ```
+# Start development server
+npm run dev
+# or: bun run dev
+```
 
-- Frontend: Create a `.env` file with:
+Visit **`http://localhost:5173`** in your browser.
 
-  ```
-   VITE_APP_API_URL=your_backed_link
-  ```
+---
 
-4. Start the backend and front end server:
+## ☁️ Deployment Guide
 
-   ```
-   cd backend && npm start
-   cd frontend && npm run dev
-   ```
+### Deploy Backend (Render.com)
+1. Create a new **Web Service** on Render connected to this repository.
+2. Set Root Directory to `server`.
+3. Build Command: `npm install` (or `bun install`).
+4. Start Command: `node server.js` (or `bun start`).
+5. Add Environment Variables (`MONGODB_URI`, `GEMINI_API_KEY`, `CLERK_SECRET_KEY`, `APP_DATA_KEY`, `CORS_ORIGIN`).
+6. Render will automatically configure `RENDER_EXTERNAL_URL` and keep the service warm via the built-in 14-minute worker.
+
+### Deploy Frontend (Vercel / Netlify / Cloudflare Pages)
+1. Create a new project connected to the `client` directory.
+2. Build Command: `npm run build`
+3. Output Directory: `dist`
+4. Set Environment Variables:
+   - `VITE_APP_API_URL`: URL of your deployed backend (e.g. `https://your-app.onrender.com`)
+   - `VITE_CLERK_PUBLISHABLE_KEY`: Clerk publishable key
+
+---
+
+## 📄 License
+This project is licensed under the MIT License.
