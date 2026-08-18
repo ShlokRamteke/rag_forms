@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Background -->
+  <rect width="64" height="64" rx="14" fill="#1a1a1a"/>
+  
+  <!-- Architectural grid border -->
+  <rect x="4" y="4" width="56" height="56" rx="10" stroke="#333333" stroke-width="1.5" stroke-dasharray="3 3"/>
+  
+  <!-- Outer Shield / Vault Frame -->
+  <path d="M32 12L48 18V30C48 40.5 41.2 50 32 53C22.8 50 16 40.5 16 30V18L32 12Z" stroke="#f5f5f0" stroke-width="2.5" stroke-linejoin="round" fill="#222222"/>
+  
+  <!-- Stylized Cipher 'C' & Keyhole Inner Geometry -->
+  <path d="M37 24C34 22.5 30 22.5 27 24.5C24 26.5 23 30 23 33.5C23 37 24.5 40.5 27.5 42C30.5 43.5 34.5 43 37 41" stroke="#f5f5f0" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Central Lock Core / Vector Node -->
+  <circle cx="33" cy="33" r="3" fill="#f5f5f0"/>
+  <path d="M33 36V40" stroke="#f5f5f0" stroke-width="2" stroke-linecap="round"/>
+</svg>
