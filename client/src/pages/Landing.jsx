@@ -1,8 +1,22 @@
 import { Link } from "react-router-dom";
-import { Show, useAuth } from "@clerk/react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Landing = () => {
-  const { isLoaded, isSignedIn } = useAuth();
+  let isAuthenticated = false;
+  let isLoading = false;
+
+  const auth0Configured =
+    import.meta.env.VITE_AUTH0_DOMAIN && import.meta.env.VITE_AUTH0_CLIENT_ID;
+
+  if (auth0Configured) {
+    try {
+      const auth = useAuth0();
+      isAuthenticated = auth.isAuthenticated;
+      isLoading = auth.isLoading;
+    } catch {
+      // Auth0Provider not active
+    }
+  }
 
   return (
     <div className="bg-[#f5f5f0] text-[#1a1a1a]">
@@ -15,12 +29,12 @@ const Landing = () => {
             <a href="#security">Security</a>
           </nav>
           <div className="flex items-center gap-8 text-[10px] font-semibold uppercase tracking-[2px]">
-            <Show when={isLoaded && !isSignedIn}>
+            {!isLoading && !isAuthenticated && (
               <Link to="/app">Login</Link>
-            </Show>
-            <Show when={isLoaded && isSignedIn}>
+            )}
+            {!isLoading && isAuthenticated && (
               <Link to="/app">Dashboard</Link>
-            </Show>
+            )}
             <Link
               to="/app/forms/new"
               className="border border-[#1a1a1a] bg-[#1a1a1a] px-[33px] py-[17px] text-[12px] tracking-[1.2px] text-[#f5f5f0]"
