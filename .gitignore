@@ -24,7 +24,7 @@ pnpm-debug.log*
 
 # Antigravity IDE and internal artifacts
 .antigravity/
-
+.agents/
 # Screenshots & Local media
 screenshots/
 client/public/screenshots/

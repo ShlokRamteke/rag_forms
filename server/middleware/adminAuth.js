@@ -1,4 +1,16 @@
-import { verifyToken } from "@clerk/backend";
+import { createRemoteJWKSet, jwtVerify } from "jose";
+
+const domain = (process.env.AUTH0_DOMAIN || process.env.AUTH0_ISSUER_BASE_URL || "").trim();
+const isProduction = process.env.NODE_ENV === "production";
+
+let JWKS = null;
+let issuer = "";
+
+if (domain) {
+  const normalizedDomain = domain.replace(/^https?:\/\//, "").replace(/\/+$/, "");
+  issuer = `https://${normalizedDomain}/`;
+  JWKS = createRemoteJWKSet(new URL(`https://${normalizedDomain}/.well-known/jwks.json`));
+}
 
 const getBearerToken = (authorizationHeader = "") => {
   if (!authorizationHeader.startsWith("Bearer ")) {
@@ -8,27 +20,28 @@ const getBearerToken = (authorizationHeader = "") => {
 };
 
 export default async function requireAdmin(req, res, next) {
-  const clerkSecretKey = process.env.CLERK_SECRET_KEY;
-  const isProduction = process.env.NODE_ENV === "production";
-
   const bearerToken = getBearerToken(req.headers.authorization || "");
-  if (clerkSecretKey && bearerToken) {
+
+  if (JWKS && bearerToken) {
     try {
-      const payload = await verifyToken(bearerToken, {
-        secretKey: clerkSecretKey,
+      const { payload } = await jwtVerify(bearerToken, JWKS, {
+        issuer,
       });
+
       req.auth = {
         userId: payload.sub,
-        sessionId: payload.sid,
+        email: payload.email,
+        payload,
       };
       return next();
-    } catch (error) {
-      return res.status(401).json({ error: "Unauthorized" });
+    } catch (err) {
+      console.warn("[AdminAuth] Token verification failed:", err.message);
+      return res.status(401).json({ error: "Unauthorized", message: err.message });
     }
   }
 
-  if (clerkSecretKey) {
-    return res.status(401).json({ error: "Unauthorized" });
+  if (JWKS) {
+    return res.status(401).json({ error: "Unauthorized", message: "Missing Bearer token" });
   }
 
   if (isProduction) {

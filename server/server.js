@@ -59,8 +59,8 @@ if (process.env.NODE_ENV === "production") {
   if (!process.env.MONGODB_URI || !process.env.GEMINI_API_KEY) {
     throw new Error("Missing required environment variables (MONGODB_URI, GEMINI_API_KEY).");
   }
-  if (!process.env.CLERK_SECRET_KEY) {
-    throw new Error("Set CLERK_SECRET_KEY in production.");
+  if (!process.env.AUTH0_DOMAIN && !process.env.AUTH0_ISSUER_BASE_URL) {
+    throw new Error("Set AUTH0_DOMAIN in production.");
   }
   if (!process.env.APP_DATA_KEY || process.env.APP_DATA_KEY === "dev-insecure-default-key") {
     throw new Error("Set a secure APP_DATA_KEY (32+ characters) in production.");

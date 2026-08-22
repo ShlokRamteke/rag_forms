@@ -155,9 +155,10 @@ rag_forms/
 PORT=5001
 MONGODB_URI=mongodb+srv://<username>:<password>@cluster.mongodb.net/rag_forms
 GEMINI_API_KEY=AIzaSy...
-CLERK_SECRET_KEY=sk_test_...
+AUTH0_DOMAIN=your-tenant.us.auth0.com
+AUTH0_AUDIENCE=https://api.cipherforms.com
 APP_DATA_KEY=your_secure_32_character_encryption_key_here
-CORS_ORIGIN=http://localhost:5173,http://localhost:3000
+CORS_ORIGIN=http://localhost:5173,http://localhost:3000,https://cipherforms.vercel.app
 
 # Optional: Cloud keep-alive (Auto-detected on Render.com)
 RENDER_EXTERNAL_URL=https://your-backend.onrender.com
@@ -166,7 +167,9 @@ RENDER_EXTERNAL_URL=https://your-backend.onrender.com
 ### Frontend (`client/.env`)
 ```ini
 VITE_APP_API_URL=http://localhost:5001
-VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
+VITE_AUTH0_DOMAIN=your-tenant.us.auth0.com
+VITE_AUTH0_CLIENT_ID=your_client_id_here
+VITE_AUTH0_AUDIENCE=https://api.cipherforms.com
 ```
 
 ---
@@ -177,7 +180,7 @@ VITE_CLERK_PUBLISHABLE_KEY=pk_test_...
 - Node.js (v18+) or [Bun](https://bun.sh)
 - MongoDB Database (Local instance or MongoDB Atlas)
 - Google Gemini API Key ([Google AI Studio](https://aistudio.google.com/))
-- Clerk Application ([Clerk Dashboard](https://dashboard.clerk.com/))
+- Auth0 Account ([Auth0 Dashboard](https://manage.auth0.com/))
 
 ### 1. Clone Repository
 ```bash
@@ -224,7 +227,7 @@ Visit **`http://localhost:5173`** in your browser.
 2. Set Root Directory to `server`.
 3. Build Command: `npm install` (or `bun install`).
 4. Start Command: `node server.js` (or `bun start`).
-5. Add Environment Variables (`MONGODB_URI`, `GEMINI_API_KEY`, `CLERK_SECRET_KEY`, `APP_DATA_KEY`, `CORS_ORIGIN`).
+5. Add Environment Variables (`MONGODB_URI`, `GEMINI_API_KEY`, `AUTH0_DOMAIN`, `AUTH0_AUDIENCE`, `APP_DATA_KEY`, `CORS_ORIGIN`).
 6. Render will automatically configure `RENDER_EXTERNAL_URL` and keep the service warm via the built-in 14-minute worker.
 
 ### Deploy Frontend (Vercel / Netlify / Cloudflare Pages)
@@ -233,7 +236,9 @@ Visit **`http://localhost:5173`** in your browser.
 3. Output Directory: `dist`
 4. Set Environment Variables:
    - `VITE_APP_API_URL`: URL of your deployed backend (e.g. `https://your-app.onrender.com`)
-   - `VITE_CLERK_PUBLISHABLE_KEY`: Clerk publishable key
+   - `VITE_AUTH0_DOMAIN`: Auth0 Domain (e.g. `your-tenant.us.auth0.com`)
+   - `VITE_AUTH0_CLIENT_ID`: Auth0 Single Page App Client ID
+   - `VITE_AUTH0_AUDIENCE`: Auth0 API Identifier (e.g. `https://api.cipherforms.com`)
 
 ---
 
